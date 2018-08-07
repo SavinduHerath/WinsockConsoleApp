@@ -16,4 +16,4 @@ public:
 	void listen_message();
 };
 
-void send_message(string message);
+//void send_message(string message);

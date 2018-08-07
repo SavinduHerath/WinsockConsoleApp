@@ -47,17 +47,21 @@ int main(int argc, char** argv)
 	//return 0;
 #pragma endregion
 
-	thread lisThread(&Connector01::listen_message, Connector01()); 
+	Connector01 conn = Connector01();
+
+	conn.listen_message();
+
+	//thread lisThread(&Connector01::listen_message, Connector01()); 
 	
-	while (true)
-	{
-		string message;
-		cout << "Console App_01>";
-		getline(cin, message);
-		send_message(message);
-	}
+	//while (true)
+	//{
+	//	string message;
+	//	cout << "Console App_01>";
+	//	getline(cin, message);
+	//	send_message(message);
+	//}
 	
-	lisThread.join();
+	//lisThread.join();
 
 	return 0;
 }
