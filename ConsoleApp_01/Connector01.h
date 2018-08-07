@@ -13,7 +13,7 @@ class Connector01
 public:
 	Connector01();
 	~Connector01();
-	void listen_message();
+	void listen_message(int listeningPort);
 };
 
-void send_message(string message);
+void send_message(int sendingPort, string message);

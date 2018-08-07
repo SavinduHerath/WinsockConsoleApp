@@ -46,15 +46,25 @@ int main(int argc, char** argv)
 
 	//return 0;
 #pragma endregion
+	string listeningPort;
+	cout << "Enter Listening Port> ";
+	getline(cin, listeningPort);
+	int lp = stoi(listeningPort);
 
-	thread lisThread(&Connector01::listen_message, Connector01()); 
+	string sendingPort;
+	cout << "Enter Send Port> ";
+	getline(cin, sendingPort);
+	int sp = stoi(sendingPort);
+
+
+	thread lisThread(&Connector01::listen_message, Connector01(), lp); 
 	
 	while (true)
 	{
 		string message;
-		cout << "Console App_01>";
+		cout << "Console App_01> ";
 		getline(cin, message);
-		send_message(message);
+		send_message(sp, message);
 	}
 	
 	lisThread.join();

@@ -11,7 +11,7 @@ Connector01::~Connector01()
 }
 
 
-void Connector01::listen_message()
+void Connector01::listen_message(int listeningPort)
 {
 	WSADATA WSAData;
 	SOCKET server, client;
@@ -21,7 +21,7 @@ void Connector01::listen_message()
 	server = socket(AF_INET, SOCK_STREAM, 0);
 	serverAddr.sin_addr.s_addr = INADDR_ANY;
 	serverAddr.sin_family = AF_INET;
-	serverAddr.sin_port = htons(2005);
+	serverAddr.sin_port = htons(listeningPort);
 
 	while (true) {
 		bind(server, (SOCKADDR *)&serverAddr, sizeof(serverAddr));
@@ -29,20 +29,28 @@ void Connector01::listen_message()
 		char buffer[1024];
 		memset(buffer, 0, sizeof(buffer));
 		int clientAddrSize = sizeof(clientAddr);
-		if ((client = accept(server, (SOCKADDR *)&clientAddr, &clientAddrSize)) != INVALID_SOCKET)
+		int serverAddrSize = sizeof(serverAddr);
+		if ((client = accept(server, (SOCKADDR *)&serverAddr, &serverAddrSize)) != INVALID_SOCKET)
 		{
 			//char *ip = inet_ntoa(clientAddr.sin_addr);
 			recv(client, buffer, sizeof(buffer), 0);
 			string message = buffer;
+			cout << "\nReceived Message> ";
 			cout << message << endl;
 			closesocket(client);
+		}
+		else
+		{
+			char msgBuf[256];
+			FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, WSAGetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), msgBuf, sizeof(msgBuf), NULL);
+			cout << msgBuf << endl;
 		}
 	}
 }
 
 
 
-void send_message(string message)
+void send_message(int sendingPort, string message)
 {
 	WSADATA WSAData;
 	SOCKET server;
@@ -54,7 +62,7 @@ void send_message(string message)
 
 	inet_pton(AF_INET, IP.c_str(), &addr.sin_addr.s_addr);			//_T(IP.c_str())
 	addr.sin_family = AF_INET;
-	addr.sin_port = htons(2005);
+	addr.sin_port = htons(sendingPort);
 
 	connect(server, (SOCKADDR *)&addr, sizeof(addr));
 	send(server, message.c_str(), strlen(message.c_str()), 0);
