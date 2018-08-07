@@ -1,0 +1,22 @@
+#Visual Studio
+*.suo
+*.sdf
+*.tlog
+*.idb
+*.opensdf
+*.vcxproj.user
+*.tmp
+*.pdb
+*.db
+*.opendb
+*.pbi
+*.bak
+
+# Build output folders
+.vs/
+bin/
+obj/
+*.user
+packages/
+Backup/
+Backup1/
