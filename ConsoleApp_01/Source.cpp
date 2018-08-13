@@ -64,7 +64,7 @@ int main(int argc, char** argv)
 		string message;
 		cout << "Console App_01> ";
 		getline(cin, message);
-		send_message(sp, message);
+		Connector01::send_message(sp, message);
 	}
 	
 	lisThread.join();

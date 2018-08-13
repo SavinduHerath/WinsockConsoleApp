@@ -50,7 +50,7 @@ void Connector01::listen_message(int listeningPort)
 
 
 
-void send_message(int sendingPort, string message)
+void Connector01::send_message(int sendingPort, string message)
 {
 	WSADATA WSAData;
 	SOCKET server;

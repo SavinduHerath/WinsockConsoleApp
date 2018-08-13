@@ -14,6 +14,7 @@ public:
 	Connector01();
 	~Connector01();
 	void listen_message(int listeningPort);
+	void static send_message(int sendingPort, string message);
 };
 
-void send_message(int sendingPort, string message);
+
