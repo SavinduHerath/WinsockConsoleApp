@@ -12,7 +12,7 @@
 *.pbi
 *.bak
 *.log
-*.obj
+*\*.obj
 *.exe
 *.ilk
 
@@ -24,4 +24,4 @@ obj/
 packages/
 Backup/
 Backup1/
-*/Debug/
+Debug/
