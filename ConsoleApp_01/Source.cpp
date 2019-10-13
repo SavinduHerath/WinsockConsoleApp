@@ -6,6 +6,8 @@
 #include <tchar.h>
 #include <string>
 #include <thread>
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 #include "Connector01.h"
 
 using namespace std;
@@ -46,6 +48,10 @@ int main(int argc, char** argv)
 
 	//return 0;
 #pragma endregion
+
+	testing::InitGoogleTest(&argc, argv);
+	
+
 	string listeningPort;
 	cout << "Enter Listening Port> ";
 	getline(cin, listeningPort);
@@ -59,6 +65,8 @@ int main(int argc, char** argv)
 
 	thread lisThread(&Connector01::listen_message, Connector01(), lp); 
 	
+	
+
 	while (true)
 	{
 		string message;
@@ -69,5 +77,7 @@ int main(int argc, char** argv)
 	
 	lisThread.join();
 
-	return 0;
+	RUN_ALL_TESTS();
+
+	return 0; //RUN_ALL_TESTS();
 }

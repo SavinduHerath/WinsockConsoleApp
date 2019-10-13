@@ -117,12 +117,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Connector01.cpp" />
+    <ClCompile Include="ConsoleApp_01.Test.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Connector01.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\googletestmock.v.141.1.0.1\build\native\googletestmock.v.141.targets" Condition="Exists('..\packages\googletestmock.v.141.1.0.1\build\native\googletestmock.v.141.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\googletestmock.v.141.1.0.1\build\native\googletestmock.v.141.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\googletestmock.v.141.1.0.1\build\native\googletestmock.v.141.targets'))" />
+  </Target>
 </Project>
