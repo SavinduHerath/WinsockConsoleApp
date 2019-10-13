@@ -20,3 +20,4 @@ obj/
 packages/
 Backup/
 Backup1/
+*.obj
